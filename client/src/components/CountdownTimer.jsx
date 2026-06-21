@@ -3,8 +3,8 @@ import {useState, useEffect, useRef} from 'react';
 export default function CountdownTimer({ duration, onTimeUp }) {
     const [timeLeft, setTimeLeft] = useState(duration);
     const onTimeUpRef = useRef(onTimeUp);
-    onTimeUpRef.current = onTimeUp;
 
+    useEffect(() => {onTimeUpRef.current = onTimeUp;})
     useEffect(() => {
         if (timeLeft <= 0) {
             onTimeUpRef.current();
