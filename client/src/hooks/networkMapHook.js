@@ -17,16 +17,16 @@ async function loadNetworkOnce() {
     return inflightPromise;
 }
 
-export function useNetworkData() {
+export function useNetworkData(enabled) {
     const [data, setData] = useState(cache);
     const [loading, setLoading] = useState(!cache);
     const [error, setError] = useState("");
     useEffect(() => {
-        if (cache) return;
+        if (!enabled || cache) return;
         loadNetworkOnce()
             .then(result => setData(result))
             .catch(err => setError(err.message))
             .finally(() => setLoading(false));
-    }, []);
+    }, [enabled]);
     return { stations: data?.stations ?? [], segments: data?.segments ?? [], loading, error };
 }

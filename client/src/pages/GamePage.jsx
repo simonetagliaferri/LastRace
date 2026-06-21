@@ -13,7 +13,7 @@ import CountdownTimer from "../components/CountdownTimer.jsx";
 
 function GamePage() {
     const {user, setUser} = useContext(UserContext);
-    const { stations, segments, loading: networkLoading, error: networkError } = useNetworkData();
+    const {stations, segments, loading: networkLoading, error: networkError} = useNetworkData();
     const [startStationId, setStartStationId] = useState(undefined);
     const [endStationId, setEndStationId] = useState(undefined);
     const [gameLoading, setGameLoading] = useState(true);
@@ -28,17 +28,19 @@ function GamePage() {
     const [routeValid, setRouteValid] = useState(false);
 
     useEffect(() => {
-        startGame()
-            .then(({startStationId, endStationId, initialCoins}) => {
-                setStartStationId(startStationId);
-                setEndStationId(endStationId);
-                setInitialCoins(initialCoins);
-            })
-            .catch((err) => {
-                setGameError(err)
-            })
-            .finally(() => setGameLoading(false));
-    }, []);
+        if (user?.userId) {
+            startGame()
+                .then(({startStationId, endStationId, initialCoins}) => {
+                    setStartStationId(startStationId);
+                    setEndStationId(endStationId);
+                    setInitialCoins(initialCoins);
+                })
+                .catch((err) => {
+                    setGameError(err)
+                })
+                .finally(() => setGameLoading(false));
+        }
+    }, [user?.userId]);
 
     const handleSubmit = async () => {
         try {
@@ -65,76 +67,72 @@ function GamePage() {
 
     const loading = networkLoading || gameLoading;
     const error = networkError || gameError;
-
-    if (loading) {
-        return <Spinner animation="border" />;
-    }
-
     const segmentsRevealed = activeIndex < routeWithEvents.length ? activeIndex + 1 : routeWithEvents.length;
-    const revealedScore = routeWithEvents.slice(0, segmentsRevealed).reduce((sum, { event }) => sum + (event.effectValue ?? 0), initialCoins);
+    const revealedScore = routeWithEvents.slice(0, segmentsRevealed).reduce((sum, {event}) => sum + (event.effectValue ?? 0), initialCoins);
     const displayedCoins = !submitted ? initialCoins : routeValid ? revealedScore : score;
 
     return (
-        user?.userId ?  (
-            <>
-                <div className="d-grid align-items-center mb-3" style={{ gridTemplateColumns: "1fr auto 1fr" }}>
-                    <h2 className="mb-0">Coins: {displayedCoins}</h2>
-                    <h1 className="mb-0 text-nowrap">
-                        {submitted && (!routeValid ? "You Lost" : "You Won!")}
-                    </h1>
-                    <div className="d-flex justify-content-end">
-                        {!submitted && <CountdownTimer duration={90} onTimeUp={handleSubmit} />}
+        user?.userId ? (
+            loading ? (<Spinner animation="border"/>) : (
+                <>
+                    <div className="d-grid align-items-center mb-3" style={{gridTemplateColumns: "1fr auto 1fr"}}>
+                        <h2 className="mb-0">Coins: {displayedCoins}</h2>
+                        <h1 className="mb-0 text-nowrap">
+                            {submitted && (!routeValid ? "You Lost" : "You Won!")}
+                        </h1>
+                        <div className="d-flex justify-content-end">
+                            {!submitted && <CountdownTimer duration={90} onTimeUp={handleSubmit}/>}
+                        </div>
                     </div>
-                </div>
-                {error && <Alert variant="danger">{error}</Alert>}
-                {!submitted ? (
-                    <>
-                        <Row>
-                            <Col md={7} className="d-flex">
-                                <NetworkMap
-                                    stations={stations}
-                                    segments={segments}
-                                    showLines={false}
-                                    startStationId={startStationId}
-                                    endStationId={endStationId}
-                                />
-                            </Col>
-                            <Col md={5} className="d-flex">
-                                <SegmentList
-                                    segments={segments}
-                                    selectedSegments={selectedSegments}
-                                    setSelectedSegments={setSelectedSegments}
-                                />
-
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Button className="custom-button" onClick={handleSubmit}
-                                        disabled={selectedSegments.length === 0}>
-                                    Submit
-                                </Button>
-                            </Col>
-                        </Row>
-                    </>
-                ) : (
-                    <div className="carousel-wrapper">
-                        <ResultCarousel stations={stations}
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    {!submitted ? (
+                        <>
+                            <Row>
+                                <Col md={7} className="d-flex">
+                                    <NetworkMap
+                                        stations={stations}
                                         segments={segments}
+                                        showLines={false}
                                         startStationId={startStationId}
                                         endStationId={endStationId}
-                                        routeWithEvents={routeWithEvents}
-                                        score={score}
-                                        isNewBestScore={isNewBestScore}
-                                        activeIndex={activeIndex}
-                                        setActiveIndex={setActiveIndex}
-                        />
-                    </div>
-                )}
-            </>
-        ) : (
-    <h1 className="text-center">Nothing for you here.</h1>
-    )
+                                    />
+                                </Col>
+                                <Col md={5} className="d-flex">
+                                    <SegmentList
+                                        segments={segments}
+                                        selectedSegments={selectedSegments}
+                                        setSelectedSegments={setSelectedSegments}
+                                    />
+
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Button className="custom-button" onClick={handleSubmit}
+                                            disabled={selectedSegments.length === 0}>
+                                        Submit
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </>
+                    ) : (
+                        <div className="carousel-wrapper">
+                            <ResultCarousel stations={stations}
+                                            segments={segments}
+                                            startStationId={startStationId}
+                                            endStationId={endStationId}
+                                            routeWithEvents={routeWithEvents}
+                                            score={score}
+                                            isNewBestScore={isNewBestScore}
+                                            activeIndex={activeIndex}
+                                            setActiveIndex={setActiveIndex}
+                            />
+                        </div>
+                    )}
+                </>
+            )) : (
+            <h1 className="text-center">Nothing for you here.</h1>
+        )
     );
 }
 
