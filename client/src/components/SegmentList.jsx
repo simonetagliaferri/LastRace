@@ -9,7 +9,7 @@ function SegmentList({segments, selectedSegments, setSelectedSegments}) {
             <Table className="custom-table segment-table">
                 <tbody>
                 {shuffledSegments.map(segment => {
-                    const key = `${segment.lineId}-${segment.position}`;
+                    const key = `${segment.lineId}-${segment.station1Id}-${segment.station2Id}`;
                     const selectedIndex = selectedSegments.findIndex(s => s.key === key);
                     const isSelected = selectedIndex !== -1;
                     const isLast = isSelected && selectedIndex === selectedSegments.length - 1;

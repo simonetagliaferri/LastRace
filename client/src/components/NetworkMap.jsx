@@ -13,7 +13,7 @@ function NetworkMap({stations,
                 className="network-map"
                 viewBox="0 0 1050 860"
                 preserveAspectRatio="xMidYMid meet"
-                role="img"
+                role="imgnetworkMap"
                 aria-label="Network map"
             >
                 {showLines &&
@@ -22,7 +22,7 @@ function NetworkMap({stations,
                         const p2 = stationLayout[segment.station2Id];
                         return (
                             <line
-                                key={`${segment.lineId}-${segment.position}`}
+                                key={`${segment.lineId}-${segment.station1Id}-${segment.station2Id}`}
                                 className="line-segment"
                                 x1={p1.x}
                                 y1={p1.y}
@@ -40,7 +40,7 @@ function NetworkMap({stations,
                     const p2 = stationLayout[segment.station2Id];
                     return (
                         <line
-                            key={`highlight-${segment.lineId}-${segment.position}-${index}`}
+                            key={`highlight-${segment.lineId}-${segment.station1Id}-${segment.station2Id}-${index}`}
                             className="line-segment"
                             x1={p1.x}
                             y1={p1.y}

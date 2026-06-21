@@ -11,7 +11,7 @@ export default function ResultCarousel({ stations, segments, startStationId, end
                   indicators={routeWithEvents.length > 0}
         >
             {routeWithEvents.map(({ segment, event }, idx) => (
-                <Carousel.Item key={`${segment.lineId}-${segment.position}`}>
+                <Carousel.Item key={`${segment.lineId}-${segment.station1Id}-${segment.station2Id}`}>
                     <NetworkMap stations={stations}
                                 segments={segments}
                                 showLines={false}

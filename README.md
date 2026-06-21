@@ -86,8 +86,7 @@
       "station1Id": 1,
       "station1Name": "Central",
       "station2Id": 2,
-      "station2Name": "North Gate",
-      "position": 1
+      "station2Name": "North Gate"
     }
   ]
   ```
@@ -193,8 +192,7 @@
   - `line_id` - INTEGER, FK on `lines(line_id)`
   - `station1_id` - INTEGER, FK on `stations(station_id)`
   - `station2_id` - INTEGER, FK on `stations(station_id)`
-  - `position` - INTEGER, NOT NULL
-  - PK(`line_id`, `position`)
+  - PK(`line_id`, `station1_id`, `station2_id`)
 
 - Table `events` - contains:
   - `event_id` - INTEGER, PK, AUTOINCREMENT
@@ -224,14 +222,13 @@
 
 - Segment
   ```js
-  function Segment(lineId, lineName, station1Id, station1Name, station2Id, station2Name, position) {
+  function Segment(lineId, lineName, station1Id, station1Name, station2Id, station2Name) {
     this.lineId = lineId;
     this.lineName = lineName;
     this.station1Id = station1Id;
     this.station1Name = station1Name;
     this.station2Id = station2Id;
     this.station2Name = station2Name;
-    this.position = position;
   }
   ```
 
@@ -276,5 +273,5 @@ Claude was used for:
 - Helping develop the correct algorithm to select the proper start and end stations for a game.
 - Helping define the map layout and clarifying how to use the svg component in React.
 - Clarifying the concept of useRef to have the countDownTimer as a standalone components rather than having it implemented inside the GamePage itself. 
-- Clarifying, fixing and debugging css styling for Table, Carousel and NetworkMap. I manually checked the styling and made proper adjustments manually where needed.
+- Clarifying, fixing and debugging CSS styling for Table, Carousel and NetworkMap. I manually checked the styling and made proper adjustments manually where needed.
 

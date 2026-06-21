@@ -34,7 +34,7 @@ async function getSegments() {
     }
     const list = await response.json();
     return list.map(item => new Segment(item.lineId, item.lineName, item.station1Id, item.station1Name,
-        item.station2Id, item.station2Name, item.position));
+        item.station2Id, item.station2Name));
 }
 
 export {getStations, getSegments};
