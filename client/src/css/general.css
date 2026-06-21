@@ -1,0 +1,79 @@
+:root {
+    --primary-color: #362929;
+    --primary-color-faded: #36292966;
+    --secondary-color: #c9d6cf;
+    --secondary-color-hover: #c9d6cf66;
+    --primary-bg: #f7f3eb;
+    --blue: #0099da;
+    --red: #f34b09;
+    --yellow: #efbb00;
+    --green: #49922f;
+}
+
+html body {
+    font-size: 1em;
+    color: var(--primary-color);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--primary-bg);
+}
+
+.main-content {
+    width: 95%;
+    max-width: none;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+.container {
+    width: 75%;
+    margin: auto;
+}
+
+.text {
+    color: var(--primary-color);
+}
+
+.text-danger {
+    color: var(--red);
+}
+
+.custom-button {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    background-color: transparent;
+    border: medium solid var(--primary-color);
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.custom-button:hover {
+    background-color: var(--secondary-color-hover);
+    border: medium solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.custom-button:disabled {
+    background-color: var(--primary-bg);
+    border: medium solid var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.custom-textfield {
+    background-color: var(--primary-bg);
+    border: thin solid var(--primary-color);
+    border-radius: 10px;
+    color: var(--primary-color);
+}
+
+.custom-textfield:focus {
+    color: var(--primary-color);
+    background-color: var(--primary-bg);
+    border: thin solid var(--primary-color);
+    box-shadow: 0 0 0 0.2rem var(--secondary-color);
+}
+
+.custom-textfield::placeholder {
+    color: var(--secondary-color);
+}

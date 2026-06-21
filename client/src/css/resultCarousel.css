@@ -1,0 +1,57 @@
+.card.custom-card,
+.card.custom-card--text-center {
+    margin: 1rem 0;
+    background: transparent;
+    border: medium solid var(--primary-color);
+    border-radius: 10px;
+    min-height: 160px;
+}
+
+.card.custom-card--text-center {
+    text-align: center;
+}
+
+.carousel-wrapper {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.custom-carousel {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-carousel .carousel-inner {
+    order: 1;
+}
+
+.custom-carousel .carousel-indicators {
+    position: static;
+    order: 2;
+    margin: 1rem 0 0 0;
+}
+
+.custom-carousel .carousel-indicators [data-bs-target] {
+    background-color: var(--secondary-color);
+}
+
+.custom-carousel .carousel-indicators .active {
+    background-color: var(--primary-color);
+}
+
+.custom-carousel .carousel-control-prev-icon,
+.custom-carousel .carousel-control-next-icon {
+    position: static;
+    margin: 0 0 10rem 0;
+    filter: invert(1) grayscale(100%);
+}
+
+.custom-carousel .carousel-control-prev,
+.custom-carousel .carousel-control-next {
+    opacity: 0.4;
+}
+
+.custom-carousel .carousel-control-prev:hover,
+.custom-carousel .carousel-control-next:hover {
+    opacity: 0.4;
+}

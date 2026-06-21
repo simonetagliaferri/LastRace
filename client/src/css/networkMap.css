@@ -1,0 +1,82 @@
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 1rem;
+    background: transparent;
+    border: medium solid var(--primary-color);
+    border-radius: 20px;
+    overflow-x: auto;
+}
+
+.network-map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.line-segment {
+    transition: stroke-width 0.15s ease, opacity 0.15s ease;
+}
+
+.line-segment:hover {
+    stroke-width: 13;
+    opacity: 0.88;
+    cursor: pointer;
+}
+
+.station {
+    cursor: pointer;
+}
+
+.station-dot {
+    fill: var(--primary-bg);
+    stroke: var(--primary-color);
+    stroke-width: 3;
+    transition: transform 0.15s ease, fill 0.15s ease;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.station:hover .station-dot {
+    transform: scale(1.45);
+    fill: #f8fafc;
+}
+
+.station-dot.interchange {
+    stroke: var(--secondary-color);
+    stroke-width: 5;
+}
+
+.station-label-group {
+    pointer-events: none;
+}
+
+.station-label {
+    fill: #111827;
+    font-size: 12px;
+    font-weight: 700;
+    paint-order: stroke;
+    stroke: var(--primary-bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    user-select: none;
+}
+
+.station-dot.start-station {
+    fill: #16a34a;
+    stroke: #14532d;
+}
+
+.station-dot.end-station {
+    fill: #dc2626;
+    stroke: #7f1d1d;
+}
+
+.start-station-label {
+    fill: #16a34a;
+}
+
+.end-station-label {
+    fill: #dc2626;
+}

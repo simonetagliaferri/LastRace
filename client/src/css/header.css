@@ -1,0 +1,84 @@
+.custom-navbar {
+    top: 1vh;
+    width: 95%;
+    left: 2.5%;
+    border: medium solid var(--primary-color);
+    border-radius: 30px;
+    background-color: transparent;
+}
+.custom-navbar .navbar-brand {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-brand:hover,
+.custom-navbar .navbar-brand:focus,
+.custom-navbar .navbar-brand:active,
+.custom-navbar .navbar-brand:visited {
+    color: var(--primary-color);
+}
+
+.custom-navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-text,
+.header-text:hover,
+.header-text:focus,
+.header-text:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.header-text:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.header-text.active {
+    background-color: var(--secondary-color);
+}
+
+.dropdown-menu.custom-dropdown-menu {
+    border: thin solid var(--primary-color);
+    border-radius: 20px;
+    padding: 0.5rem 0.5rem;
+    background-color: var(--primary-bg);
+}
+
+.custom-dropdown-menu .dropdown-item-text,
+.custom-dropdown-menu .dropdown-item {
+    color: var(--primary-color);
+}
+
+.custom-dropdown-menu .dropdown-item:hover,
+.custom-dropdown-menu .dropdown-item:focus {
+    background-color: var(--secondary-color-hover);
+    color: var(--primary-color);
+    border-radius: 10px;
+}
+
+.user-menu-toggle,
+.user-menu-toggle:hover,
+.user-menu-toggle:focus,
+.user-menu-toggle:active,
+.user-menu-toggle.show {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    color: var(--primary-color) !important;
+    padding: 0 !important;
+    font-size: 1em;
+}

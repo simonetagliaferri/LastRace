@@ -1,0 +1,59 @@
+// Authentication
+
+###
+POST http://localhost:3000/api/sessions
+content-type: application/json
+
+{
+  "username": "john",
+  "password": "password"
+}
+
+###
+GET http://localhost:3000/api/sessions/current
+content-type:application/json
+
+###
+DELETE http://localhost:3000/api/sessions/current
+content-type:app;application/json
+
+// Network Map
+
+###
+GET http://localhost:3000/api/networkMap/stations
+content-type:application/json
+
+###
+GET http://localhost:3000/api/networkMap/segments
+content-type:application/json
+
+// Game
+
+###
+GET http://localhost:3000/api/game/start
+content-type:application/json
+
+###
+POST http://localhost:3000/api/game/end
+content-type:application/json
+
+{
+  "segments": [
+    {
+      "station1Id": 5,
+      "station2Id": 6
+    },
+    {
+      "station1Id": 6,
+      "station2Id": 8
+    }
+  ]
+}
+
+###
+
+// Leaderboard
+
+###
+GET http://localhost:3000/api/leaderboard
+content-type:application/json
