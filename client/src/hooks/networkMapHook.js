@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import { getStations, getSegments } from "../api/networkMap.js";
+import {useEffect, useState} from "react";
+import {getSegments, getStations} from "../api/networkMap.js";
 
 let cache = null;
-let inflightPromise = null;
 
 async function loadNetworkOnce() {
     if (cache) return cache;
-    if (!inflightPromise) {
-        inflightPromise = Promise.all([getStations(), getSegments()])
-            .then(([stations, segments]) => {
-                cache = { stations, segments };
-                return cache;
-            })
-            .finally(() => { inflightPromise = null; });
-    }
-    return inflightPromise;
+    return Promise.all([getStations(), getSegments()])
+        .then(([stations, segments]) => {
+            cache = {stations, segments};
+            return cache;
+        });
 }
 
 export function useNetworkData(enabled) {
@@ -28,5 +23,5 @@ export function useNetworkData(enabled) {
             .catch(err => setError(err.message))
             .finally(() => setLoading(false));
     }, [enabled]);
-    return { stations: data?.stations ?? [], segments: data?.segments ?? [], loading, error };
+    return {stations: data?.stations ?? [], segments: data?.segments ?? [], loading, error};
 }
