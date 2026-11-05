@@ -1,5 +1,4 @@
-# Exam #1: "Last Race"
-## Student: s361334 TAGLIAFERRI SIMONE
+# Last Race
 
 ## React Client Application Routes
 
